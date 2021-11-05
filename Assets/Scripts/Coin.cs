@@ -18,7 +18,10 @@ namespace ClimbUpPuzzle
         }
         private void OnTriggerEnter(Collider col)
         {
-            if (!_collected && !_gameManager.GameFinished &&  col.CompareTag(PlayerController.PLAYER_TAG))
+            if (!_collected && !_gameManager.GameFinished &&  (
+                col.CompareTag(PlayerController.PLAYER_TAG) || col.CompareTag(ControlDisk.DISK_TAG)
+                )
+                )
             {
                 _collected = true;
                 var gm = GameManager.Current;                

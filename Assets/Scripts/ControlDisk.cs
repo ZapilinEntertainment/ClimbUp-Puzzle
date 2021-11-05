@@ -10,6 +10,7 @@ namespace ClimbUpPuzzle
         [SerializeField] private Transform _pinPoint;
         public Transform PinPoint => _pinPoint;
         public bool AtTheEndPosition { get; private set; }
+        public bool IsLeft { get; private set; }
         public float StretchValue { get; private set; }
         public float OverstretchVal { get; private set; }
 
@@ -18,7 +19,7 @@ namespace ClimbUpPuzzle
         private GameSettings _gameSettings;
         private Rigidbody _rigidbody;
         private Transform  _shoulderPoint;
-        private bool _active = false, _isLeft = false;
+        private bool _active = false;
         
         private GameManager _gameManager;
         public const string DISK_TAG = "GameController", DISK_LAYER = "Disk";
@@ -29,15 +30,15 @@ namespace ClimbUpPuzzle
             _playerController = _gameManager.PlayerController;
             _inputZone = _gameManager.InputZone;
             _gameSettings = _gameManager.GameSettings;
-            _isLeft = i_isLeft;
-            _shoulderPoint = _isLeft ? _playerController.LeftShoulderPoint : _playerController.RightShoulderPoint;
+            IsLeft = i_isLeft;
+            _shoulderPoint = IsLeft ? _playerController.LeftShoulderPoint : _playerController.RightShoulderPoint;
             _playerController.ModelChangingEvent += PlayerModelChanged;
             _rigidbody = GetComponent<Rigidbody>();            
         }
 
         private void PlayerModelChanged()
         {
-            _shoulderPoint = _isLeft ? _playerController.LeftShoulderPoint : _playerController.RightShoulderPoint;
+            _shoulderPoint = IsLeft ? _playerController.LeftShoulderPoint : _playerController.RightShoulderPoint;
             OverstretchVal = 0f;
             _rigidbody.isKinematic = false;
         }

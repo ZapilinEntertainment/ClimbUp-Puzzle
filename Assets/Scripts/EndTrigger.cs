@@ -7,6 +7,7 @@ namespace ClimbUpPuzzle
     public sealed class EndTrigger : MonoBehaviour
     {
         [SerializeField] private GameObject _completeMark;
+        [SerializeField] private bool _forLeftHand = false;
         private GameManager _gameManager;
         private bool _activated = false;
 
@@ -29,9 +30,12 @@ namespace ClimbUpPuzzle
         {
             if (!_activated && !_gameManager.GameFinished && col.CompareTag(ControlDisk.DISK_TAG))
             {
-                _activated = true;
-                _completeMark.SetActive(true);
-                col.GetComponent<ControlDisk>().ChangeTriggeredStatus(true);
+                if (col.GetComponent<ControlDisk>().IsLeft == _forLeftHand)
+                {
+                    _activated = true;
+                    _completeMark.SetActive(true);
+                    col.GetComponent<ControlDisk>().ChangeTriggeredStatus(true);
+                }
             }
         }
 
@@ -39,9 +43,12 @@ namespace ClimbUpPuzzle
         {
             if (_activated && !_gameManager.GameFinished && col.CompareTag(ControlDisk.DISK_TAG))
             {
-                _activated = false;
-                _completeMark.SetActive(false);
-                col.GetComponent<ControlDisk>().ChangeTriggeredStatus(false);
+                if (col.GetComponent<ControlDisk>().IsLeft == _forLeftHand)
+                {
+                    _activated = false;
+                    _completeMark.SetActive(false);
+                    col.GetComponent<ControlDisk>().ChangeTriggeredStatus(false);
+                }
             }
         }
     }

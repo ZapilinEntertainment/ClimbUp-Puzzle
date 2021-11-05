@@ -63,6 +63,7 @@ namespace ClimbUpPuzzle
             _savedRightDiskPosition = _rightControlDisk.transform.position;
             _rightControlDisk.Prepare(this, false);
             //
+            TotalCoinsCount = GameConstants.GetTotalCoinsCount();
             _uiManager = FindObjectOfType<UIManager>();
             if (_uiManager == null) { Debug.LogError("no ui manager found"); }
             _uiManager.Prepare(this);
@@ -104,9 +105,11 @@ namespace ClimbUpPuzzle
             if (!GameFinished && _leftControlDisk.AtTheEndPosition && _rightControlDisk.AtTheEndPosition)
             {
                 GameFinished = true;
-                _uiManager.SetState(UIState.Victory);
                 StopGame();
                 Audiomaster.PlaySound(SoundClipType.Victory);
+                GameConstants.IncreaseLastLevelIndex();
+                _uiManager.SetState(UIState.Victory);               
+                          
             }
         }
 
@@ -132,7 +135,7 @@ namespace ClimbUpPuzzle
 
         public void AddCoin(int x)
         {
-            GameConstants.AddCoins(x);
+            GameConstants.ChangeCoins(x);
             TotalCoinsCount = GameConstants.GetTotalCoinsCount();            
         }
 
@@ -141,6 +144,20 @@ namespace ClimbUpPuzzle
             _uiManager.PlayCoinEffect(CameraController.Camera.WorldToScreenPoint(pos));
             _coinCollectPE.transform.position = pos;
             _coinCollectPE.Play();
+        }
+
+        public bool TryUpgrade()
+        {
+            int cost = GameConstants.GetUpgradeCost();
+            TotalCoinsCount = GameConstants.GetTotalCoinsCount();
+            if (TotalCoinsCount >= cost)
+            {
+                GameConstants.ChangeCoins(-cost);
+                GameConstants.IncreaseUpgradeCost();
+                TotalCoinsCount = GameConstants.GetTotalCoinsCount();
+                return true;
+            }
+            else return false;
         }
     }
 }

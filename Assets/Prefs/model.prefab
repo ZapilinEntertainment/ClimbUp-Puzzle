@@ -700,7 +700,7 @@ GameObject:
   - component: {fileID: 1504500101443970500}
   - component: {fileID: 1504500101443970501}
   - component: {fileID: 1504500101443970498}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: mixamorig:LeftForeArm
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1540,7 +1540,7 @@ GameObject:
   - component: {fileID: 2320270219246072563}
   - component: {fileID: 2320270219246072561}
   - component: {fileID: 2320270219246072560}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: mixamorig:RightArm
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2492,7 +2492,7 @@ GameObject:
   - component: {fileID: 6373467940594238732}
   - component: {fileID: 6373467940594238730}
   - component: {fileID: 6373467940594238733}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: mixamorig:LeftArm
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2602,7 +2602,7 @@ GameObject:
   - component: {fileID: 6474890941968633720}
   - component: {fileID: 6474890941968633721}
   - component: {fileID: 6474890941968633718}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: mixamorig:RightForeArm
   m_TagString: Player
   m_Icon: {fileID: 0}
