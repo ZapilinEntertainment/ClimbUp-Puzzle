@@ -14,11 +14,13 @@ namespace ClimbUpPuzzle
         private ControlDisk _activatedControlDisk = null;
         private RaycastHit _raycastHit;
         private bool _legitHitPosition = false, _raycasting = false, _anyDiskControlled = false;
-        private const string BACKWALL_TAG = "Backwall", DISK_TAG = "GameController";
+        private int _raycastMask ;
+        private const string BACKWALL_TAG = "Backwall", BACKWALL_LAYER = "Default";
 
         public void Prepare(CameraController cc)
         {
             _cam = cc.Camera;
+            _raycastMask = LayerMask.GetMask(ControlDisk.DISK_LAYER, BACKWALL_LAYER);
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -50,10 +52,10 @@ namespace ClimbUpPuzzle
 
         private void Raycast(Vector3 position)
         {
-            if (Physics.Raycast(_cam.ScreenPointToRay(position), out _raycastHit))
+            if (Physics.Raycast(_cam.ScreenPointToRay(position),  out _raycastHit, _raycastMask))
             {
                 var collider = _raycastHit.collider;
-                if (collider.CompareTag(DISK_TAG))
+                if (collider.CompareTag(ControlDisk.DISK_TAG))
                 {
                     _legitHitPosition = true;
                     if (_anyDiskControlled)
@@ -85,6 +87,12 @@ namespace ClimbUpPuzzle
                 }
             }
             else ClearControlDiskData();
-        }       
+        }
+
+        private void OnDisable()
+        {
+            _raycasting = false;
+            ClearControlDiskData();
+        }
     }
 }
