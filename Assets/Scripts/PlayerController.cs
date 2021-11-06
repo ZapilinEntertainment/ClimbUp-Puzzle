@@ -53,9 +53,9 @@ namespace ClimbUpPuzzle
 
                 if (_inputZone.FollowTouchPoint)
                 {
-                    _model.Headbone.transform.LookAt(_inputZone.TargetTouchPosition);
+                    _model.Headbone.transform.LookAt(_inputZone.TargetTouchPosition, Vector3.up);
                 }
-                //else _model.Headbone.rotation = Quaternion.RotateTowards(_model.Headbone.rotation, Quaternion.LookRotation(transform.forward, Vector3.up), 30f * Time.fixedDeltaTime);
+                else _model.Headbone.rotation = Quaternion.RotateTowards(_model.Headbone.rotation, Quaternion.LookRotation(transform.forward, Vector3.up), 30f * Time.fixedDeltaTime);
             }
             else
             {
