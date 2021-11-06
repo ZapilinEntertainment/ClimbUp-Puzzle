@@ -58,9 +58,9 @@ namespace ClimbUpPuzzle
             _rigidbody.useGravity = true;            
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            float t = Time.deltaTime;
+            float t = Time.fixedDeltaTime;
             bool overstretch = false;
             if (_active)
             {

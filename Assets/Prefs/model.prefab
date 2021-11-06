@@ -951,7 +951,7 @@ CharacterJoint:
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_ConnectedMassScale: 100
 --- !u!1 &1530263309015910220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,7 +1045,7 @@ CharacterJoint:
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
   m_MassScale: 1
-  m_ConnectedMassScale: 1
+  m_ConnectedMassScale: 100
 --- !u!1 &1530263310251485097
 GameObject:
   m_ObjectHideFlags: 0
