@@ -69,6 +69,10 @@ namespace ClimbUpPuzzle
             _uiManager.Prepare(this);
             //
             _uiManager.SetState(UIState.GameStart);
+            //
+
+            Application.targetFrameRate = 60;
+            Time.fixedDeltaTime = 0.02f;
         }
 
         public void StartGame()

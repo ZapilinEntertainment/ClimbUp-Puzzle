@@ -37,7 +37,7 @@ namespace ClimbUpPuzzle
             _inputZone = _gameManager.InputZone;   
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (IsPinned)
             {
@@ -45,16 +45,17 @@ namespace ClimbUpPuzzle
                     d = mpos - cpos;
                     d.z = 0f;
                 _model.LeftHandPoint.position = cpos  + d.normalized * _diskRadius;
-                //_leftHand.rotation = Quaternion.LookRotation(Vector3.left, Vector3.forward);
+                _model.LeftHandPoint.rotation = Quaternion.LookRotation(Vector3.left, Vector3.forward);
                 cpos = _rightPinPoint.position + _correctionVector;
                 d = mpos - cpos; d.z = 0f;
                 _model.RightHandPoint.position = cpos + d.normalized * _diskRadius;
-                //_rightHand.rotation = Quaternion.LookRotation(Vector3.right, Vector3.forward);
+                _model.RightHandPoint.rotation = Quaternion.LookRotation(Vector3.right, Vector3.forward);
 
                 if (_inputZone.FollowTouchPoint)
                 {
                     _model.Headbone.transform.LookAt(_inputZone.TargetTouchPosition);
                 }
+                //else _model.Headbone.rotation = Quaternion.RotateTowards(_model.Headbone.rotation, Quaternion.LookRotation(transform.forward, Vector3.up), 30f * Time.fixedDeltaTime);
             }
             else
             {

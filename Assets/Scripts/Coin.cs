@@ -28,8 +28,13 @@ namespace ClimbUpPuzzle
                 gm.AddCoin(_value);
                 gm.CollectEffect(transform.position);
                 Audiomaster.PlaySound(SoundClipType.CoinCollected);
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
+        }
+
+        private void OnEnable()
+        {
+            _collected = false;
         }
     }
 }
